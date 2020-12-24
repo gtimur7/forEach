@@ -41,7 +41,7 @@ export class QuickPanelService {
       return;
     }
     this.loading.next(true);
-    const api = `${environment.apiUrl}search?order=desc&sort=votes&tagged=${tag}&site=stackoverflow`
+    const api = `${environment.apiUrl}search?order=desc&sort=votes&tagged=${encodeURIComponent(tag)}&site=stackoverflow`
     return this.http.get<SearchData<Question>>(api).subscribe(data => {
       this.quickData.next(data);
       this.loading.next(false);
@@ -51,19 +51,15 @@ export class QuickPanelService {
   showMostPopularQuestionsByAuthor(authorId: number, authorName: string) {
     this.searchByPropertyName.next('author');
     this.searchByValue.next(authorName);
-console.log('se')
     if (this.useFake) {
       this.quickData.next(search1);
       return;
     }
-console.log('23')
 
     this.loading.next(true);
     const api = `${environment.apiUrl}users/${authorId}/questions?order=desc&sort=votes&site=stackoverflow`
     return this.http.get<SearchData<Question>>(api).subscribe(data => {
       this.quickData.next(data);
-console.log('f323')
-
       this.loading.next(false);
     });
   }

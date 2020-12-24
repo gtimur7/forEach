@@ -20,7 +20,7 @@ export class QuestionService {
     if (this.useFake) {
       return of(search1);
     }
-    const api = `${environment.apiUrl}search?order=desc&sort=relevance&intitle=${searchValue}&site=stackoverflow`
+    const api = `${environment.apiUrl}search?order=desc&sort=relevance&intitle=${encodeURIComponent(searchValue)}&site=stackoverflow`
     return this.http.get<SearchData<Question>>(api);
   }
 
