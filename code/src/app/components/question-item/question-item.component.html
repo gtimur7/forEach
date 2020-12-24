@@ -6,9 +6,7 @@
   </div>
   <div class="question__body">
     <div class="body__title">
-      <a [routerLink]='["/question", question.question_id]'>
-        {{question.title}}
-      </a>
+      <a [routerLink]='["/question", question.question_id]' [innerHtml]='question.title'></a>
     </div>
     <div class="body__additional">
       <div class="additional__tags">
